@@ -33,6 +33,18 @@
 
  ### 2. Use case analysis
  2.1. Use Case Analysis
+<img width="989" height="765" alt="image" src="https://github.com/user-attachments/assets/82bb83cb-d087-4f24-ba27-0f7dd32d2cb0" />
+
+- Login/Logout
+- Create new diary
+- Create new page
+- Access diary
+- Background edit
+- Insert object
+- Insert image
+- Redo/Undo
+- Object edit
+- Save
 
  2.2. Use Case Description <br>
 ### - Use case #1: Join
