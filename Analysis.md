@@ -16,8 +16,9 @@
 1. Introduction
 2. Use case analysis
 3. Domain analysis
-4. Glossary
-5. Reference
+4. User Interface Prototype
+5. Glossary
+6. Reference
 
 ### 1. Introduction
 1.1. Summary
@@ -497,10 +498,18 @@
 |Due Date|2026.05.08|
 <br><br>
 
- ### 3. Domain analysis
+ ### 4. Domain analysis
+1. Admin: 사용자 관리, 로그인 등 서버에서 이루어지는 모든 작업들을 관리하는 클래스이다.
+2. View: 사용자 인터페이스를 통해 사용자로부터 요청받은 입력 결과를 출력하는 클래스이다.
+3. EvevtController: 사용자가 입력하는 모든 이벤트를 처리하는 클래스이다.
+4. DataController: 사용자가 추가한 요소들의 데이터를 관리하고 저장하는 클래스이다. 필요에 따라 다른 클래스와 상호작용과 데이터 공유가 가능하다.
+5. ObjectController: 사용자가 오브젝트를 편집할 때 발생하는 변화를 처리하고 저장하는 클래스이다.
+6. Imageloader: 외부로부터 이미지를 불러오고 그 요소를 편집할 수 있게 내부 데이터베이스에 등록한다.
+7. AdDiary: 다이어리에 관련된 모든 작업(생성, 편집)을 담당하는 클래스이다.
+8. AdPage: 페이지 관련된 모든 작업(생성, 편집)을 담당하는 클래스이다.
  <br><br>
  
- ### 4. Glossary
+ ### 5. Glossary
  | 용어 | 설명 |
 | :--- | :--- |
 | Schedule Diary | 프로젝트로 만들어지는 앱의 이름 |
@@ -513,6 +522,6 @@
 | UI | 사용자 인터페이스의 약자. 사용자가 보는 화면 |
 <br><br>
  
- ### 5. Reference
+ ### 6. Reference
 <br><br>
   
