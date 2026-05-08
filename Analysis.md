@@ -498,7 +498,7 @@
 |Due Date|2026.05.08|
 <br><br>
 
- ### 4. Domain analysis
+ ### 3. Domain analysis
 1. Admin: 사용자 관리, 로그인 등 서버에서 이루어지는 모든 작업들을 관리하는 클래스이다.
 2. View: 사용자 인터페이스를 통해 사용자로부터 요청받은 입력 결과를 출력하는 클래스이다.
 3. EvevtController: 사용자가 입력하는 모든 이벤트를 처리하는 클래스이다.
@@ -508,7 +508,28 @@
 7. AdDiary: 다이어리에 관련된 모든 작업(생성, 편집)을 담당하는 클래스이다.
 8. AdPage: 페이지 관련된 모든 작업(생성, 편집)을 담당하는 클래스이다.
  <br><br>
- 
+
+ ### 4. User interface prototype
+ 1) Login Screen
+<img width="1322" height="773" alt="스크린샷 2026-05-08 225257" src="https://github.com/user-attachments/assets/37f563d6-5865-4a69-98cb-ae330d17744b" />
+로그인 상황에서의 UI이다. 사용자와 시스템 관리자는 해당 화면을 통해 로그인할 수 있다.<br>
+*로그인 실패 시 입력 오류를 나타낸다.
+<img width="643" height="297" alt="스크린샷 2026-05-08 225313" src="https://github.com/user-attachments/assets/0d861c73-bf18-4839-9dd8-0eae20d948b6" />
+
+ 2) Main/Diary Create
+<img width="1436" height="730" alt="스크린샷 2026-05-08 225331" src="https://github.com/user-attachments/assets/cd8578ee-a92e-471c-bab8-a14a93d9456e" />
+로그인 후 나타나는 메인 화면으로 다이어리를 생성할 수 있다. 다이어리는 아래 이미지 같은 형식으로 생성된다.
+<img width="1422" height="649" alt="스크린샷 2026-05-08 230421" src="https://github.com/user-attachments/assets/5263e572-73e8-4a92-ac4d-68540f153852" />
+
+3) Page Create
+다이어리를 생성하면 다이어리 내에 페이지를 생성할 수 있다. 버튼을 통해 수정과 삭제를 자유롭게 할 수 있따.
+<img width="1418" height="649" alt="스크린샷 2026-05-08 230458" src="https://github.com/user-attachments/assets/21f479f5-60f8-403a-a3b3-ec9d55510a6e" />
+
+4) Page Edit
+5) 페이지를 편집할 수 있는 UI이다. 사용자는 텍스트나 이미지를 자유롭게 추가할 수 있다. 그리고 우측 상단의 저장 버튼을 통해 다이어리에 저장할 수 있다.
+<img width="1398" height="640" alt="스크린샷 2026-05-08 230448" src="https://github.com/user-attachments/assets/debdcbe1-7850-4f43-b623-9f072cb8870e" />
+<br><br>
+
  ### 5. Glossary
  | 용어 | 설명 |
 | :--- | :--- |
