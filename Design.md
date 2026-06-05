@@ -22,12 +22,11 @@
 7. Reference
 <br><br>
 
-
 ### 1. Introduction
   최근 Y2K 열풍으로 인해 이전에 유행했던 다이어리 꾸미기가 다시 알음알음 부상하고 있다. 이는 주로 젊은 여성층을 중심으로 종이에 스티커나 마스킹 테이프 등을 붙이며 꾸미고 SNS에 올려 공유하는 것으로 자주 볼 수 있다.
   이때 종이에 직접 오리고 붙여 꾸미는 아날로그의 매력도 있지만 이를 디지털로 할 수 있으면 어떨까하는 생각이 들었다. 그 이유는 첫째, 다이어리를 꾸미기 위한 용품들의 자리 차지가 크다. 스티커는 물론이고 마스킹 테이프 등 기본적으로 여러 장의 인쇄물로 이루어져 있기에 부피 차지가 꽤 크다. 둘째, 관리가 힘들다. 앞서 말했듯 양이 많기에 내가 원하는 용품을 찾으려면 오랜 시간이 걸린다. 셋째, 자원 낭비. 다이어리를 꾸밀 때 쓰는 메모지 등은 대량으로 파는 경우가 대다수라 조금 쓰고 쓰지 않게 되어 결국 버리게 된다. 이는 자원과 돈 둘 다 낭비된다고 볼 수 있다.
-  기존에도 수많은 다이어리 어플리케이션이 존재한다. 하지만 그들은 꾸밈의 자유도가 너무 낮고, 이미지의 첨부도 어렵다. 그래서 조금 더 자유도를 높인 프로그램을 만들어 다이어리를 쓰고 꾸밀 수 있도록 하면 사용자들이 만족감을 느낄 수 있을 것이라 예측한다.<br><br>
-
+  기존에도 수많은 다이어리 어플리케이션이 존재한다. 하지만 그들은 꾸밈의 자유도가 너무 낮고, 이미지의 첨부도 어렵다. 그래서 조금 더 자유도를 높인 프로그램을 만들어 다이어리를 쓰고 꾸밀 수 있도록 하면 사용자들이 만족감을 느낄 수 있을 것이라 예측한다.
+<br><br>
 
 ### 2. Class diagram
 <img width="803" height="851" alt="image" src="https://github.com/user-attachments/assets/14063414-737e-4211-8f62-7e0d12e22701" />
@@ -145,14 +144,39 @@ UI에서 발생하는 모든 이벤트(입력, 클릭)를 감지하여 그에 �
 
    
 ### 3. Sequence diagram
-1) Registration
-<img width="1043" height="728" alt="image" src="https://github.com/user-attachments/assets/6a9c34e7-b673-476f-ac3b-69fb55f85885" />
+1) Registration(1)
+<img width="1043" height="728" alt="image" src="https://github.com/user-attachments/assets/6a9c34e7-b673-476f-ac3b-69fb55f85885" /><br>
+ 위 그림은 최초로 시스템을 사용하는 사용자가 회원으로 등록하는 과정이다.
 
-
+2) Login(2)
+<img width="893" height="746" alt="image" src="https://github.com/user-attachments/assets/d3c6780f-46da-4cf4-9164-89585dd9ee72" /><br>
+ 위 그림은 사용자가 로그인을 하는 과정이다. 
+<br>
+3) AdDiary(8)
+<img width="1028" height="601" alt="image" src="https://github.com/user-attachments/assets/c4f7d019-8767-4111-8cf2-59a3a63e3ddb" /><br>
+ 위 그림은 사용자가 자신의 워크 스페이스의 다이어리를 관리하는 과정이다.
+<br>
+4) EditPage(9) / ObjectController(6)
+<img width="1015" height="733" alt="image" src="https://github.com/user-attachments/assets/aa0d1be2-ef9b-4da9-b522-006f080c38a8" /><br>
+ 위 그림은 사용자가 자신의 페이지를 편집하는 과정이다.
+<br>
+5) ImageLoader(7)
+<img width="964" height="770" alt="image" src="https://github.com/user-attachments/assets/b3614af2-2826-48d2-85c5-0ddf52e6117a" /><br>
+ 위 그림은 사용자가 자신의 로컬 저장소나 시스템에서 데이터를 불러오는 과정이다.
+<br>
+6) Redo / Undo (6)
+<img width="790" height="862" alt="image" src="https://github.com/user-attachments/assets/e9c96b84-f9fd-4768-b1c1-64d9a9e1dd00" /><br>
+ 위 그림은 사용자가 이전에 행한 작업을 실행 취소하거나, 다시 실행하는 과정이다.
+<br>
+7) DataController (5)
+<img width="836" height="678" alt="image" src="https://github.com/user-attachments/assets/43b2d14f-60f6-455a-9441-28deee51d4a5" /><br>
+ 위 그림은 사용자가 페이지와 다이어리릐 데이터를 저장하고 불러오는 과정이다.
+<br><br>
 
 ### 4. State machine diagram
 <img width="1759" height="701" alt="image" src="https://github.com/user-attachments/assets/032d8c26-ab56-4578-a03c-553cb196496b" />
  회원가입 후 로그인을 하면 앱 사용 권한을 얻게 된다. 권한을 얻은 사용자는 자유롭게 본인의 영역에 다이어리와 페이지를 생성하고, 수정, 편집, 저장을 할 수 있다. 사용자가 작성한 항목들은 데이터베이스에서 관리되며 이전에 작성한 기록들도 열람할 수 있다. 서버측은 이 일련의 과정을 관리 감독하고, 사용자의 등록 정보 또한 관리한다(사용자 등록, 조회, 삭제 등)
+ <br><br>
 
 ### 5. Implementation requirements
 1) Hardware Requirements
@@ -162,7 +186,7 @@ UI에서 발생하는 모든 이벤트(입력, 클릭)를 감지하여 그에 �
 2) Software Requirements
    - Windows 10 이상
    - Implementation Language: Java (Version 11 이상)
-
+<br><br>
 
  ### 6. Glossary
  | 용어 | 설명 |
