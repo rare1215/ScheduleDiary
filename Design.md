@@ -4,7 +4,7 @@
 
 | Revision date | Version # | Description | Author |
 | :--- | :---: | :--- | :--- |
-| | 1.0 | First Writing | |
+| 2026.06.05 | 1.0 | First Writing | |
 | | | | |
 | | | | |
 | | | | |
@@ -19,15 +19,18 @@
 4. State machine diagram<br>
 5. Implementation requirements<br>
 6. Glossary<br>
-7. Reference<br><br>
+7. Reference
+<br><br>
+
 
 ### 1. Introduction
   최근 Y2K 열풍으로 인해 이전에 유행했던 다이어리 꾸미기가 다시 알음알음 부상하고 있다. 이는 주로 젊은 여성층을 중심으로 종이에 스티커나 마스킹 테이프 등을 붙이며 꾸미고 SNS에 올려 공유하는 것으로 자주 볼 수 있다.
   이때 종이에 직접 오리고 붙여 꾸미는 아날로그의 매력도 있지만 이를 디지털로 할 수 있으면 어떨까하는 생각이 들었다. 그 이유는 첫째, 다이어리를 꾸미기 위한 용품들의 자리 차지가 크다. 스티커는 물론이고 마스킹 테이프 등 기본적으로 여러 장의 인쇄물로 이루어져 있기에 부피 차지가 꽤 크다. 둘째, 관리가 힘들다. 앞서 말했듯 양이 많기에 내가 원하는 용품을 찾으려면 오랜 시간이 걸린다. 셋째, 자원 낭비. 다이어리를 꾸밀 때 쓰는 메모지 등은 대량으로 파는 경우가 대다수라 조금 쓰고 쓰지 않게 되어 결국 버리게 된다. 이는 자원과 돈 둘 다 낭비된다고 볼 수 있다.
   기존에도 수많은 다이어리 어플리케이션이 존재한다. 하지만 그들은 꾸밈의 자유도가 너무 낮고, 이미지의 첨부도 어렵다. 그래서 조금 더 자유도를 높인 프로그램을 만들어 다이어리를 쓰고 꾸밀 수 있도록 하면 사용자들이 만족감을 느낄 수 있을 것이라 예측한다.<br><br>
 
+
 ### 2. Class diagram
-1. Registration
+### 1. Registration
 신규 회원 등록 시 사용되는 클래스
 1) Attiributes
   - idField:JTextField - 사용자가 입력한 아이디
@@ -40,7 +43,7 @@
    - clickSubmit():void — 입력된 정보를 바탕으로 EventController에 가입 요청하는 메소드
    - clickCancel():void — 회원가입을 취소하고 다시 로그인 화면으로 이동하는 메소드
 
-2. Login
+### 2. Login
 시스템 실행 후 로그인 시 사용되는 클래스
 1) Attiributes
   - idField:JTextField - 사용자가 입력한 아이디
@@ -48,10 +51,10 @@
 2) Methods
    - loginCheck(idField:JTextField, pwField: JPasswordField):boolean - 사용자가 입력한 아이디와 패스워드가 데이터베이스에 있고, 그와 일치하는지 확인하는 메소드
 
-3. Interface
+### 3. Interface
 사용자에게 UI 화면을 띄워주는 클래스
 1) Attiributes
-   - currentScreen:String — 현재 활성화된 화면의 이름(Login, Registration, Main, Edit 등)
+   - currentScreen:String - 현재 활성화된 화면의 이름(Login, Registration, Main, Edit 등)
 2) Methods
    - renderLoginScreen() - 로그인 화면을 출력하는 메소드
    - renderMainScreen(diaryList) - 다이어리들의 리스트를 띄워주는 메인 화면을 출력하는 메소드
@@ -59,7 +62,7 @@
    - renderRegistrationScreen(): void - 회원가입 입력 폼 화면을 출력하는 메소드
    - showPopup(message): void  - 용량 초과, 중복된 ID입니다, 회원가입 완료 등의 팝업창을 출력하는 메소드
 
-4. EventController
+### 4. EventController
 UI에서 발생하는 모든 이벤트(입력, 클릭)를 감지하여 그에 맞는 결과를 실핸하는 클래스
 1) Methods
    - handleLoginSubmit(id:String, pw:String) - 로그인 이벤트를 제어하는 메소드
@@ -74,7 +77,7 @@ UI에서 발생하는 모든 이벤트(입력, 클릭)를 감지하여 그에 �
    - handleRedo(): void - 다시 실행 버튼 핸들링
    - handleSave(): void - 저장 버튼 클릭 시 DataController로 데이터 전달하는 메소드
 
-5. DataController
+### 5. DataController
 사용자가 입력한 모든 데이터를 저장, 관리, 로드하는 클래스
 1) Attiributes
    - dbConnection:Object - 데이터베이스에 연결하는 객체
@@ -86,7 +89,7 @@ UI에서 발생하는 모든 이벤트(입력, 클릭)를 감지하여 그에 �
    - loadPageData(diaryId, pageId):AdPage - 저장된 페이지 데이터를 로드하는 메소드
    - isolateUserData(userId):void - 사용자 개개인의 일기 데이터가 섞이지 않도록 저장 공간을 격리하는 메소드
 
-6. ObjectController
+### 6. ObjectController
 텍스트, 오브젝트, 이미지 등 페이지 내에 작성되는 개체들의 속성 변경 및 정렬, 실행 취소 기능을 담당하는 클래스
 1) Attiributes
    - undoStack:Stack - 뒤로 돌리기(Undo)를 위한 직전 작업 이력 스택
@@ -99,7 +102,7 @@ UI에서 발생하는 모든 이벤트(입력, 클릭)를 감지하여 그에 �
    - undo():void - 작업 기록을 한 단계씩 실행 취소하는 메소드
    - redo():void - 작업 기록을 한 단계씩 재실행하는 메소드
 
-7. ImageLoader
+### 7. ImageLoader
 사용자의 로컬 저장소로부터 이미지를 불러오고, 이미지의 용량 체크, 관리 및 최적화를 하는 클래스
 1) Attiributes
    - maxImageSize:long = 15,728,640(15Mbytes) - 파일 최대 허용 용량 제한 변수
@@ -109,7 +112,7 @@ UI에서 발생하는 모든 이벤트(입력, 클릭)를 감지하여 그에 �
    - optimizeImage(filePath):Object - 시스템에 무리가 가는 이미지 작업를 경량화하여 앱이 정지하는 현상을 방지하는 메소드
    - uploadImageToDB(image):String - 최적화된 이미지 데이터를 저장소에 보관하는 메소드
 
-8. AdDiary
+### 8. AdDiary
 다이어리, 페이지를 묶어 관리하는 클래스
 1) Attiributes
    - diaryId:String - 다이어리 고유 식별자
@@ -121,7 +124,7 @@ UI에서 발생하는 모든 이벤트(입력, 클릭)를 감지하여 그에 �
    - removePage(pageId):void - 특정 페이지를 제거하는 메소드
    - getPageList():List - 다이어리 내 전체 페이지 리스트를 획득하는 메소드
   
-9. EditPage
+### 9. EditPage
 사용자가 텍스트, 오브젝트, 이미지를 올리고 배경을 편집하는 실질적인 작업 영역이 되는 클래스
 1) Attiributes
    - pageId:String - 페이지 고유 식별자
@@ -134,6 +137,8 @@ UI에서 발생하는 모든 이벤트(입력, 클릭)를 감지하여 그에 �
    - addElement(element):void - 요소 삽입 시 페이지 삽입 요소 리스트에 추가하는 메소드
    - updateElement(elementId, updatedData):void - 요소 업데이트 시 페이지 삽입 요소 리스트를 업데이트 하는 메소드
    - removeElement(elementId):void - 요소 삭제 시 페이지 삽입 요소 리스트에서 제거하는 메소드
+<br><br>
+
    
 ### 3. Sequence diagram
 
@@ -142,9 +147,27 @@ UI에서 발생하는 모든 이벤트(입력, 클릭)를 감지하여 그에 �
 
 
 ### 5. Implementation requirements
+1) Hardware Requirements
+   - CPU: Intel Core i3 이상
+   - RAM: 8 GByte 이상
+   - HDD/SDD: 5 GByte 이상
+2) Software Requirements
+   - Windows 10 이상
+   - Implementation Language: Java (Version 11 이상)
 
 
-### 6. Glossary
+ ### 6. Glossary
+ | 용어 | 설명 |
+| :--- | :--- |
+| Schedule Diary | 프로젝트로 만들어지는 앱의 이름 |
+| 사용자 | 프로그램을 실질적으로 이용하는 사람들 |
+| 데이터베이스, 저장소 | 정보를 저장하고 관리하는 곳 |
+| 어플리케이션, 앱 | 사용자들이 실제 사용하는 응용 프로그램 |
+| 최적화 | 앱 구동을 효율적인 방식으로 만드는 것 |
+| 다이어리 | 사용자가 작업한 페이지들을 묶는 폴더의 개념 |
+| 페이지 | 사용자가 앱에서 작업할 수 있는 작업 영역 |
+| UI | 사용자 인터페이스의 약자. 사용자가 보는 화면 |
+<br><br>
 
 
 ### 7. Reference
