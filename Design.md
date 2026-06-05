@@ -30,53 +30,111 @@
 1. Registration
 신규 회원 등록 시 사용되는 클래스
 1) Attiributes
-  - idField:JTextField
-  - pwField:JPasswordField
-  - nameField:JTextField
-  - emailField:JTextField
-  - submitBtn:JButton
-  - cancelBtn:JButton
+  - idField:JTextField - 사용자가 입력한 아이디
+  - pwField:JPasswordField - 사용자가 입력한 패스워드
+  - nameField:JTextField - 사용자가 입력한 이름
+  - emailField:JTextField - 사용자가 입력한 이메일
+  - submitBtn:JButton - 회원가입 버튼
+  - cancelBtn:JButton - 회원가입 취소 버튼
 2) Methods
-   - clickSubmit(): void — 입력된 정보를 바탕으로 EventController에 가입 요청하는 메소드
-   - clickCancel(): void — 회원가입을 취소하고 다시 로그인 화면으로 이동하는 메소드
+   - clickSubmit():void — 입력된 정보를 바탕으로 EventController에 가입 요청하는 메소드
+   - clickCancel():void — 회원가입을 취소하고 다시 로그인 화면으로 이동하는 메소드
 
 2. Login
 시스템 실행 후 로그인 시 사용되는 클래스
 1) Attiributes
-  - idField:JTextField
-  - pwField:JPasswordField
+  - idField:JTextField - 사용자가 입력한 아이디
+  - pwField:JPasswordField - 사용자가 입력한 패스워드
 2) Methods
-   - loginCheck(idField:JTextField, pwField: JPasswordField): boolean
-   - GoRegister(): void - 로그인 화면에서 회원가입 화면으로 이동하는 메소드
+   - loginCheck(idField:JTextField, pwField: JPasswordField):boolean - 사용자가 입력한 아이디와 패스워드가 데이터베이스에 있고, 그와 일치하는지 확인하는 메소드
 
 3. Interface
 사용자에게 UI 화면을 띄워주는 클래스
 1) Attiributes
-   - currentScreen:String — 현재 활성화된 화면 이름(Login, Registration, Main, Edit 등)
+   - currentScreen:String — 현재 활성화된 화면의 이름(Login, Registration, Main, Edit 등)
 2) Methods
-   - renderLoginScreen() - 로그인 화면 출력
+   - renderLoginScreen() - 로그인 화면을 출력하는 메소드
    - renderMainScreen(diaryList) - 다이어리들의 리스트를 띄워주는 메인 화면을 출력하는 메소드
-   - renderPageEditScreen(page): void — 페이지 편집 화면을 출력하는 메소드
-   - renderRegistrationScreen(): void — 회원가입 입력 폼 화면을 화면에 렌더링하는 메소드
-   - showPopup(message): void  "용량 초과", "중복된 ID입니다", "회원가입 완료" 등 팝업창을 출력하는 메소
+   - renderPageEditScreen(page): void - 페이지 편집 화면을 출력하는 메소드
+   - renderRegistrationScreen(): void - 회원가입 입력 폼 화면을 출력하는 메소드
+   - showPopup(message): void  - 용량 초과, 중복된 ID입니다, 회원가입 완료 등의 팝업창을 출력하는 메소드
 
-3. EventController
+4. EventController
 UI에서 발생하는 모든 이벤트(입력, 클릭)를 감지하여 그에 맞는 결과를 실핸하는 클래스
-1) Attiributes
-   -
-   -
-2) Methods
-   -
-   -
+1) Methods
+   - handleLoginSubmit(id:String, pw:String) - 로그인 이벤트를 제어하는 메소드
+   - handleLogoutRequest():void - 로그아웃 이벤트를 제어하는 베소드
+   - handleRegisterRoute():void - 로그인 화면에서 회원가입 화면으로 이동하는 버튼 이벤트의 트리거
+   - handleRegistrationSubmit(id, pw, name, email): void - 회원가입 창에서 입력받은 사용자 정보를 받아 등록을 진행하는 메소드
+   - handleCreateDiary():void - 새 다이어리를 생성하는 메소드
+   - handleCreatePage(position):void - 새 페이지를 생성하는 메소드
+   - handleInsertElement(type) - 텍스트, 오브젝트, 이미지 삽입의 이벤트 트리거
+   - handleEditElement(elementId):void - 텍스트, 오브젝트, 이미지 편집의 이벤트 트리거
+   - handleUndo():void - 뒤로 돌리기 버튼 핸들링
+   - handleRedo(): void - 다시 실행 버튼 핸들링
+   - handleSave(): void - 저장 버튼 클릭 시 DataController로 데이터 전달하는 메소드
 
-3. Interface
-사용자에게 UI 화면을 띄워주는 클래스
+5. DataController
+사용자가 입력한 모든 데이터를 저장, 관리, 로드하는 클래스
 1) Attiributes
-   -
-   -
+   - dbConnection:Object - 데이터베이스에 연결하는 객체
+   - storageStatus:Object - 현재 사용자의 저장소 용량 상태 및 경로 관리
 2) Methods
-   -
-   -
+   - registerNewUser(id, pw, name, email):boolean - DB 혹은 텍스트 파일 저장소에 신규 회원 정보 등록 및 전용 다이어리 공간을 동적으로 할당하는 메소드
+   - savePageData(userId, pageData):boolean - 완성된 페이지를 DB에 저장하는 메소드
+   - loadDiaryList(userId): List - 메인 화면 진입 시 해당 사용자의 다이어리 목록을 리스트로 불러오는 메소드
+   - loadPageData(diaryId, pageId):AdPage - 저장된 페이지 데이터를 로드하는 메소드
+   - isolateUserData(userId):void - 사용자 개개인의 일기 데이터가 섞이지 않도록 저장 공간을 격리하는 메소드
+
+6. ObjectController
+텍스트, 오브젝트, 이미지 등 페이지 내에 작성되는 개체들의 속성 변경 및 정렬, 실행 취소 기능을 담당하는 클래스
+1) Attiributes
+   - undoStack:Stack - 뒤로 돌리기(Undo)를 위한 직전 작업 이력 스택
+   - redoStack:Stack - 다시 실행(Redo)을 위한 취소된 작업 이력 스택
+2) Methods
+   - createElement(type):Object - 기본 오브젝트 및 빈 텍스트 박스 객체를 생성하는 메소드
+   - modifyElement(elementId, attributes):void - 요소의 크기, 각도, 색상, 두께, 폰트 정보 수정하는 메소드
+   - alignElements(elements, alignmentType):void - 선택된 요소들을 규칙(중앙, 좌측, 우측)에 맞춰 자동 정렬하는 메소드
+   - applyBorder(elementId, thickness):void - 선택한 요소 바깥에 지정한 두께의 테두리를 생성하는 메소드
+   - undo():void - 작업 기록을 한 단계씩 실행 취소하는 메소드
+   - redo():void - 작업 기록을 한 단계씩 재실행하는 메소드
+
+7. ImageLoader
+사용자의 로컬 저장소로부터 이미지를 불러오고, 이미지의 용량 체크, 관리 및 최적화를 하는 클래스
+1) Attiributes
+   - maxImageSize:long = 15,728,640(15Mbytes) - 파일 최대 허용 용량 제한 변수
+2) Methods
+   - browseLocalStorage():String - 모바일 디바이스 파일 탭/갤러리 연동 후 선택된 파일 경로를 반환하는 메소드
+   - validateImageSize(filePath):boolean - 파일이 15MB 이하인지 검증하여 초과 시 예외 처리를 하는 트리거 메소드
+   - optimizeImage(filePath):Object - 시스템에 무리가 가는 이미지 작업를 경량화하여 앱이 정지하는 현상을 방지하는 메소드
+   - uploadImageToDB(image):String - 최적화된 이미지 데이터를 저장소에 보관하는 메소드
+
+8. AdDiary
+다이어리, 페이지를 묶어 관리하는 클래스
+1) Attiributes
+   - diaryId:String - 다이어리 고유 식별자
+   - diaryName:String - 다이어리 제목
+   - ownerId:String - 사용자의 ID
+   - pages:List<AdPage> - 다이어리에 속한 페이지들의 리스트
+2) Methods
+   - addPage(page, position):void - 다이어리 내 지정된 위치(맨 앞, 맨 뒤, 특정 페이지 사이)에 새 페이지 삽입하는 메소드
+   - removePage(pageId):void - 특정 페이지를 제거하는 메소드
+   - getPageList():List - 다이어리 내 전체 페이지 리스트를 획득하는 메소드
+  
+9. EditPage
+사용자가 텍스트, 오브젝트, 이미지를 올리고 배경을 편집하는 실질적인 작업 영역이 되는 클래스
+1) Attiributes
+   - pageId:String - 페이지 고유 식별자
+   - diaryId:String - 소속된 다이어리 ID
+   - pageNumber:int - 다이어리 내 순번
+   - backgroundStyle:Map - 배경 이미지 및 배경 설정 정보
+   - elementsList:List - 페이지 내에 삽입된 모든 요소(텍스트박스, 도형, 이미지 객체)들의 리스트
+2) Methods
+   - setBackground(bgData):void - 배경 이미지 편집 및 적용
+   - addElement(element):void - 요소 삽입 시 페이지 삽입 요소 리스트에 추가하는 메소드
+   - updateElement(elementId, updatedData):void - 요소 업데이트 시 페이지 삽입 요소 리스트를 업데이트 하는 메소드
+   - removeElement(elementId):void - 요소 삭제 시 페이지 삽입 요소 리스트에서 제거하는 메소드
+   
 ### 3. Sequence diagram
 
 
