@@ -30,6 +30,10 @@
 
 
 ### 2. Class diagram
+<img width="803" height="851" alt="image" src="https://github.com/user-attachments/assets/14063414-737e-4211-8f62-7e0d12e22701" />
+<br>
+< class diagram >
+
 ### 1. Registration
 신규 회원 등록 시 사용되는 클래스
 1) Attiributes
@@ -141,10 +145,14 @@ UI에서 발생하는 모든 이벤트(입력, 클릭)를 감지하여 그에 �
 
    
 ### 3. Sequence diagram
+1) Registration
+<img width="1043" height="728" alt="image" src="https://github.com/user-attachments/assets/6a9c34e7-b673-476f-ac3b-69fb55f85885" />
+
 
 
 ### 4. State machine diagram
-
+<img width="1759" height="701" alt="image" src="https://github.com/user-attachments/assets/032d8c26-ab56-4578-a03c-553cb196496b" />
+ 회원가입 후 로그인을 하면 앱 사용 권한을 얻게 된다. 권한을 얻은 사용자는 자유롭게 본인의 영역에 다이어리와 페이지를 생성하고, 수정, 편집, 저장을 할 수 있다. 사용자가 작성한 항목들은 데이터베이스에서 관리되며 이전에 작성한 기록들도 열람할 수 있다. 서버측은 이 일련의 과정을 관리 감독하고, 사용자의 등록 정보 또한 관리한다(사용자 등록, 조회, 삭제 등)
 
 ### 5. Implementation requirements
 1) Hardware Requirements
