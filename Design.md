@@ -146,31 +146,31 @@ UI에서 발생하는 모든 이벤트(입력, 클릭)를 감지하여 그에 �
 ### 3. Sequence diagram
 1) Registration(1)
 <img width="1043" height="728" alt="image" src="https://github.com/user-attachments/assets/6a9c34e7-b673-476f-ac3b-69fb55f85885" /><br>
- 위 그림은 최초로 시스템을 사용하는 사용자가 회원으로 등록하는 과정이다.
+ 위 그림은 최초로 시스템을 사용하는 사용자가 회원으로 등록하는 과정이다. 사용자가 회원 정보를 입력하면, 시스템에서 중복 아이디 여부를 검사해 시스템에 등록한다. 그 후 성공 시 회원가입 완료 창을 띄우고, 실패 시 중복된 ID임을 띄운다.
 
 2) Login(2)
 <img width="893" height="746" alt="image" src="https://github.com/user-attachments/assets/d3c6780f-46da-4cf4-9164-89585dd9ee72" /><br>
- 위 그림은 사용자가 로그인을 하는 과정이다. 
+ 위 그림은 사용자가 로그인을 하는 과정이다. 사용자가 아이디와 패스워드를 입력하면 이벤트 컨트롤러가 이를 검사 후 데이터베이스에 조회해 로그인 성공, 실패 여부를 판별한다. 이 때 로그인 성공 시에는 메인 화면을 출력하고, 실패 시에는 로그인 실패 창을 띄운다.
 <br>
 3) AdDiary(8)
 <img width="1028" height="601" alt="image" src="https://github.com/user-attachments/assets/c4f7d019-8767-4111-8cf2-59a3a63e3ddb" /><br>
- 위 그림은 사용자가 자신의 워크 스페이스의 다이어리를 관리하는 과정이다.
+ 위 그림은 사용자가 자신의 워크 스페이스의 다이어리를 관리하는 과정이다. 새 다이어리 생성 버튼을 눌러 새 다이어리를 만들거나, 새 페이지 추가 버튼을 통해 새 페이지를 만들 수 있다.
 <br>
-4) EditPage(9) / ObjectController(6)
+5) EditPage(9) / ObjectController(6)
 <img width="1015" height="733" alt="image" src="https://github.com/user-attachments/assets/aa0d1be2-ef9b-4da9-b522-006f080c38a8" /><br>
- 위 그림은 사용자가 자신의 페이지를 편집하는 과정이다.
+ 위 그림은 사용자가 자신의 페이지를 편집하는 과정이다. 텍스트나 오브젝트를 삽입할 수 있고, 삽입된 요소들을 선택해 편집을 할 수도 있다.
 <br>
-5) ImageLoader(7)
+6) ImageLoader(7)
 <img width="964" height="770" alt="image" src="https://github.com/user-attachments/assets/b3614af2-2826-48d2-85c5-0ddf52e6117a" /><br>
- 위 그림은 사용자가 자신의 로컬 저장소나 시스템에서 데이터를 불러오는 과정이다.
+ 위 그림은 사용자가 자신의 로컬 저장소나 시스템에서 데이터를 불러오는 과정이다. 이미지 삽입 버튼을 클릭해 이벤트 컨트롤러, 이미지 로더를 타고 이미지를 불러온다. 이때 용량이 15mb보다 크면 불러올 수 없게 막는다.
 <br>
-6) Redo / Undo (6)
+7) Redo / Undo (6)
 <img width="790" height="862" alt="image" src="https://github.com/user-attachments/assets/e9c96b84-f9fd-4768-b1c1-64d9a9e1dd00" /><br>
- 위 그림은 사용자가 이전에 행한 작업을 실행 취소하거나, 다시 실행하는 과정이다.
+ 위 그림은 사용자가 이전에 행한 작업을 실행 취소하거나, 다시 실행하는 과정이다. undo, redo버튼을 누르면 상태를 기록해둔 스택에서 작업 상황을 불러와 반영한다.
 <br>
-7) DataController (5)
+8) DataController (5)
 <img width="836" height="678" alt="image" src="https://github.com/user-attachments/assets/43b2d14f-60f6-455a-9441-28deee51d4a5" /><br>
- 위 그림은 사용자가 페이지와 다이어리릐 데이터를 저장하고 불러오는 과정이다.
+ 위 그림은 사용자가 페이지와 다이어리릐 데이터를 저장하고 불러오는 과정이다. 저장 버튼을 클릭하면 이벤트 먼트롤러와 데이터 컨트롤러를 통해 저장되고 성공 시 저장 완료 메시지가 뜬다.
 <br><br>
 
 ### 4. State machine diagram
