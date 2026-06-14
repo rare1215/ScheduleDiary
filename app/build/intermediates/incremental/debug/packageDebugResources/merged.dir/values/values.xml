@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="accent">#CE93D8</color>
+    <color name="background">#F5F0FF</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="divider">#E0E0E0</color>
+    <color name="error">#F44336</color>
+    <color name="overlay">#80000000</color>
+    <color name="primary">#9C27B0</color>
+    <color name="primary_light">#E9D5FF</color>
+    <color name="primary_soft">#F3E8FF</color>
+    <color name="primary_variant">#7B1FA2</color>
+    <color name="success">#4CAF50</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="text_hint">#BDBDBD</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="transparent">#00000000</color>
+    <string name="app_name">나의 다이어리</string>
+    <string name="btn_back_to_list">페이지 목록으로</string>
+    <string name="btn_cancel">취소</string>
+    <string name="btn_login">로그인</string>
+    <string name="btn_logout">로그아웃</string>
+    <string name="btn_new_diary">+ 새 다이어리</string>
+    <string name="btn_new_page">+ 새 페이지</string>
+    <string name="btn_register">등록</string>
+    <string name="btn_save">저장</string>
+    <string name="btn_save_page">저장</string>
+    <string name="cd_align_center">가운데 정렬</string>
+    <string name="cd_align_left">왼쪽 정렬</string>
+    <string name="cd_align_right">오른쪽 정렬</string>
+    <string name="cd_bold">굵게</string>
+    <string name="cd_insert_image">이미지 삽입</string>
+    <string name="cd_insert_shape">도형 삽입</string>
+    <string name="cd_italic">기울임</string>
+    <string name="cd_redo">다시 실행</string>
+    <string name="cd_strike">취소선</string>
+    <string name="cd_underline">밑줄</string>
+    <string name="cd_undo">실행 취소</string>
+    <string name="hint_cover_photo">커버 사진 추가</string>
+    <string name="hint_email">your@email.com</string>
+    <string name="hint_page_title">제목</string>
+    <string name="hint_password">••••••••</string>
+    <string name="hint_search_diary">다이어리 검색…</string>
+    <string name="hint_search_page">페이지 검색…</string>
+    <string name="label_cover_color">커버 색상</string>
+    <string name="label_cover_photo">커버 사진</string>
+    <string name="label_description">설명 (선택)</string>
+    <string name="label_diary_name">다이어리 이름 *</string>
+    <string name="label_email">이메일</string>
+    <string name="label_name">이름</string>
+    <string name="label_password">비밀번호</string>
+    <string name="label_password_confirm">비밀번호 확인</string>
+    <string name="title_app">나의 다이어리</string>
+    <string name="title_diary_edit">다이어리 편집</string>
+    <string name="title_register">회원가입</string>
+    <string name="txt_no_account">계정이 없으신가요? <font color="#9C27B0">회원가입</font></string>
+    <style name="DiaryCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardBackgroundColor">@color/surface</item>
+    </style>
+    <style name="DiaryEditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxStrokeColor">@color/primary_light</item>
+        <item name="hintTextColor">@color/text_secondary</item>
+    </style>
+    <style name="PrimaryButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/primary_light</item>
+        <item name="android:textColor">@color/primary_variant</item>
+        <item name="cornerRadius">24dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
+    <style name="Theme.ScheduleDiary" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_variant</item>
+        <item name="colorOnPrimary">@color/text_on_primary</item>
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorOnSecondary">@color/text_on_primary</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="android:statusBarColor">@color/primary</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+    <style name="ToolbarIcon">
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:tint">@color/text_secondary</item>
+        <item name="android:padding">6dp</item>
+    </style>
+</resources>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background">
+
+    <!-- 상단 툴바: 뒤로 / 제목 / 저장 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"
+        android:background="@color/surface"
+        android:elevation="2dp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_arrow_back"
+            android:tint="@color/text_secondary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="페이지 목록으로"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tvPageTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:singleLine="true" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="저장"
+            android:textSize="13sp"
+            android:textColor="@color/primary_variant"
+            app:backgroundTint="@color/primary_light"
+            app:cornerRadius="18dp"
+            app:icon="@drawable/ic_save"
+            app:iconTint="@color/primary_variant"
+            app:iconSize="16dp" />
+    </LinearLayout>
+
+    <!-- 서식 툴바 (스크린샷 2번처럼 두 줄) -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/surface"
+        android:scrollbars="none"
+        android:elevation="1dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="4dp">
+
+            <!-- 1행: B I U S | 정렬 | 목록 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageButton android:id="@+id/btnBold"
+                    style="@style/ToolbarIcon" android:src="@drawable/ic_format_bold"
+                    android:contentDescription="@string/cd_bold" android:alpha="0.4"/>
+                <ImageButton android:id="@+id/btnItalic"
+                    style="@style/ToolbarIcon" android:src="@drawable/ic_format_italic"
+                    android:contentDescription="@string/cd_italic" android:alpha="0.4"/>
+                <ImageButton android:id="@+id/btnUnderline"
+                    style="@style/ToolbarIcon" android:src="@drawable/ic_format_underline"
+                    android:contentDescription="@string/cd_underline" android:alpha="0.4"/>
+                <ImageButton android:id="@+id/btnStrike"
+                    style="@style/ToolbarIcon" android:src="@drawable/ic_format_strikethrough"
+                    android:contentDescription="@string/cd_strike" android:alpha="0.4"/>
+
+                <View android:layout_width="1dp" android:layout_height="20dp"
+                    android:background="@color/divider" android:layout_marginHorizontal="4dp"/>
+
+                <ImageButton android:id="@+id/btnAlignLeft"
+                    style="@style/ToolbarIcon" android:src="@drawable/ic_align_left"
+                    android:contentDescription="@string/cd_align_left"/>
+                <ImageButton android:id="@+id/btnAlignCenter"
+                    style="@style/ToolbarIcon" android:src="@drawable/ic_align_center"
+                    android:contentDescription="@string/cd_align_center"/>
+                <ImageButton android:id="@+id/btnAlignRight"
+                    style="@style/ToolbarIcon" android:src="@drawable/ic_align_right"
+                    android:contentDescription="@string/cd_align_right"/>
+
+                <View android:layout_width="1dp" android:layout_height="20dp"
+                    android:background="@color/divider" android:layout_marginHorizontal="4dp"/>
+
+                <ImageButton android:id="@+id/btnBullet"
+                    style="@style/ToolbarIcon" android:src="@drawable/ic_format_list_bulleted"
+                    android:contentDescription="글머리"/>
+                <ImageButton android:id="@+id/btnList"
+                    style="@style/ToolbarIcon" android:src="@drawable/ic_format_list_numbered"
+                    android:contentDescription="텍스트 추가"/>
+
+            </LinearLayout>
+
+            <!-- 2행: 도형 | 배경 | 이미지 | 폰트크기 | Undo/Redo -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageButton android:id="@+id/btnShape"
+                    style="@style/ToolbarIcon" android:src="@drawable/ic_shapes"
+                    android:contentDescription="@string/cd_insert_shape"/>
+                <ImageButton android:id="@+id/btnBackground"
+                    style="@style/ToolbarIcon" android:src="@drawable/ic_palette"
+                    android:contentDescription="배경"/>
+                <ImageButton android:id="@+id/btnImage"
+                    style="@style/ToolbarIcon" android:src="@drawable/ic_image"
+                    android:contentDescription="@string/cd_insert_image"/>
+
+                <View android:layout_width="1dp" android:layout_height="20dp"
+                    android:background="@color/divider" android:layout_marginHorizontal="4dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="보통"
+                    android:textSize="11sp"
+                    android:textColor="@color/text_secondary"
+                    app:backgroundTint="@color/primary_soft"
+                    app:cornerRadius="8dp"
+                    android:paddingHorizontal="8dp"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
+                <View android:layout_width="1dp" android:layout_height="20dp"
+                    android:background="@color/divider" android:layout_marginHorizontal="4dp"/>
+
+                <ImageButton android:id="@+id/btnUndo"
+                    style="@style/ToolbarIcon" android:src="@drawable/ic_undo"
+                    android:contentDescription="@string/cd_undo" android:alpha="0.3"/>
+                <ImageButton android:id="@+id/btnRedo"
+                    style="@style/ToolbarIcon" android:src="@drawable/ic_redo"
+                    android:contentDescription="@string/cd_redo" android:alpha="0.3"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- 캔버스 (편집 영역) -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+
+            <com.schedulediary.view.PageCanvasView
+                android:id="@+id/canvasView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="800dp"
+                android:background="@color/surface" />
+
+        </ScrollView>
+    </HorizontalScrollView>
+
+</LinearLayout>

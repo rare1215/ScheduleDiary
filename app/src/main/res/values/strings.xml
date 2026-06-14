@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">나의 다이어리</string>
+
+    <!-- 로그인 -->
+    <string name="label_email">이메일</string>
+    <string name="label_password">비밀번호</string>
+    <string name="hint_email">your@email.com</string>
+    <string name="hint_password">••••••••</string>
+    <string name="btn_login">로그인</string>
+    <string name="txt_no_account">계정이 없으신가요? <font color="#9C27B0">회원가입</font></string>
+
+    <!-- 회원가입 -->
+    <string name="title_register">회원가입</string>
+    <string name="label_name">이름</string>
+    <string name="label_password_confirm">비밀번호 확인</string>
+    <string name="btn_register">등록</string>
+    <string name="btn_cancel">취소</string>
+
+    <!-- 메인 -->
+    <string name="hint_search_diary">다이어리 검색…</string>
+    <string name="btn_new_diary">+ 새 다이어리</string>
+    <string name="title_app">나의 다이어리</string>
+    <string name="btn_logout">로그아웃</string>
+
+    <!-- 다이어리 편집 다이얼로그 -->
+    <string name="title_diary_edit">다이어리 편집</string>
+    <string name="label_cover_photo">커버 사진</string>
+    <string name="hint_cover_photo">커버 사진 추가</string>
+    <string name="label_diary_name">다이어리 이름 *</string>
+    <string name="label_description">설명 (선택)</string>
+    <string name="label_cover_color">커버 색상</string>
+    <string name="btn_save">저장</string>
+
+    <!-- 페이지 목록 -->
+    <string name="hint_search_page">페이지 검색…</string>
+    <string name="btn_new_page">+ 새 페이지</string>
+
+    <!-- 페이지 편집 -->
+    <string name="btn_back_to_list">페이지 목록으로</string>
+    <string name="btn_save_page">저장</string>
+    <string name="hint_page_title">제목</string>
+
+    <!-- 툴바 접근성 -->
+    <string name="cd_bold">굵게</string>
+    <string name="cd_italic">기울임</string>
+    <string name="cd_underline">밑줄</string>
+    <string name="cd_strike">취소선</string>
+    <string name="cd_align_left">왼쪽 정렬</string>
+    <string name="cd_align_center">가운데 정렬</string>
+    <string name="cd_align_right">오른쪽 정렬</string>
+    <string name="cd_insert_shape">도형 삽입</string>
+    <string name="cd_insert_image">이미지 삽입</string>
+    <string name="cd_undo">실행 취소</string>
+    <string name="cd_redo">다시 실행</string>
+</resources>
