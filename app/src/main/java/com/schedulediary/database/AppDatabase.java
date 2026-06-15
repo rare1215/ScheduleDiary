@@ -11,7 +11,7 @@ import com.schedulediary.model.AdPage;
 import com.schedulediary.model.User;
 
 @Database(entities = {User.class, AdDiary.class, AdPage.class},
-        version = 1,
+        version = 2,
         exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 

@@ -1,11 +1,15 @@
 [
     {
-        "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_align_left.xml.flat",
-        "source": "com.schedulediary.app-main-39:/drawable/ic_align_left.xml"
+        "merged": "com.schedulediary.app-merged_res-37:/layout_item_diary_list.xml.flat",
+        "source": "com.schedulediary.app-main-39:/layout/item_diary_list.xml"
     },
     {
         "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_format_list_bulleted.xml.flat",
         "source": "com.schedulediary.app-main-39:/drawable/ic_format_list_bulleted.xml"
+    },
+    {
+        "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_align_left.xml.flat",
+        "source": "com.schedulediary.app-main-39:/drawable/ic_align_left.xml"
     },
     {
         "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_format_italic.xml.flat",
@@ -14,6 +18,10 @@
     {
         "merged": "com.schedulediary.app-merged_res-37:/drawable_bg_icon_circle.xml.flat",
         "source": "com.schedulediary.app-main-39:/drawable/bg_icon_circle.xml"
+    },
+    {
+        "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_text_fields.xml.flat",
+        "source": "com.schedulediary.app-main-39:/drawable/ic_text_fields.xml"
     },
     {
         "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_format_list_numbered.xml.flat",
@@ -32,6 +40,14 @@
         "source": "com.schedulediary.app-main-39:/layout/item_page.xml"
     },
     {
+        "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_format_size.xml.flat",
+        "source": "com.schedulediary.app-main-39:/drawable/ic_format_size.xml"
+    },
+    {
+        "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_drag_handle.xml.flat",
+        "source": "com.schedulediary.app-main-39:/drawable/ic_drag_handle.xml"
+    },
+    {
         "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_add.xml.flat",
         "source": "com.schedulediary.app-main-39:/drawable/ic_add.xml"
     },
@@ -44,24 +60,32 @@
         "source": "com.schedulediary.app-main-39:/layout/item_diary.xml"
     },
     {
+        "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_crop.xml.flat",
+        "source": "com.schedulediary.app-main-39:/drawable/ic_crop.xml"
+    },
+    {
         "merged": "com.schedulediary.app-merged_res-37:/drawable_bg_page_number.xml.flat",
         "source": "com.schedulediary.app-main-39:/drawable/bg_page_number.xml"
-    },
-    {
-        "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_redo.xml.flat",
-        "source": "com.schedulediary.app-main-39:/drawable/ic_redo.xml"
-    },
-    {
-        "merged": "com.schedulediary.app-merged_res-37:/layout_activity_register.xml.flat",
-        "source": "com.schedulediary.app-main-39:/layout/activity_register.xml"
     },
     {
         "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_shapes.xml.flat",
         "source": "com.schedulediary.app-main-39:/drawable/ic_shapes.xml"
     },
     {
+        "merged": "com.schedulediary.app-merged_res-37:/layout_activity_register.xml.flat",
+        "source": "com.schedulediary.app-main-39:/layout/activity_register.xml"
+    },
+    {
+        "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_redo.xml.flat",
+        "source": "com.schedulediary.app-main-39:/drawable/ic_redo.xml"
+    },
+    {
         "merged": "com.schedulediary.app-merged_res-37:/layout_activity_diary_detail.xml.flat",
         "source": "com.schedulediary.app-main-39:/layout/activity_diary_detail.xml"
+    },
+    {
+        "merged": "com.schedulediary.app-merged_res-37:/drawable_bg_color_preview_circle.xml.flat",
+        "source": "com.schedulediary.app-main-39:/drawable/bg_color_preview_circle.xml"
     },
     {
         "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_format_bold.xml.flat",
@@ -72,8 +96,16 @@
         "source": "com.schedulediary.app-main-39:/drawable/ic_align_right.xml"
     },
     {
+        "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_rotate.xml.flat",
+        "source": "com.schedulediary.app-main-39:/drawable/ic_rotate.xml"
+    },
+    {
         "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_logout.xml.flat",
         "source": "com.schedulediary.app-main-39:/drawable/ic_logout.xml"
+    },
+    {
+        "merged": "com.schedulediary.app-merged_res-37:/layout_item_page_grid.xml.flat",
+        "source": "com.schedulediary.app-main-39:/layout/item_page_grid.xml"
     },
     {
         "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_undo.xml.flat",
@@ -84,8 +116,16 @@
         "source": "com.schedulediary.app-main-39:/layout/activity_login.xml"
     },
     {
+        "merged": "com.schedulediary.app-merged_res-37:/layout_dialog_crop_image.xml.flat",
+        "source": "com.schedulediary.app-main-39:/layout/dialog_crop_image.xml"
+    },
+    {
         "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_format_underline.xml.flat",
         "source": "com.schedulediary.app-main-39:/drawable/ic_format_underline.xml"
+    },
+    {
+        "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_grid_view.xml.flat",
+        "source": "com.schedulediary.app-main-39:/drawable/ic_grid_view.xml"
     },
     {
         "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_arrow_back.xml.flat",
@@ -102,6 +142,10 @@
     {
         "merged": "com.schedulediary.app-merged_res-37:/layout_activity_page_edit.xml.flat",
         "source": "com.schedulediary.app-main-39:/layout/activity_page_edit.xml"
+    },
+    {
+        "merged": "com.schedulediary.app-merged_res-37:/layout_dialog_new_page.xml.flat",
+        "source": "com.schedulediary.app-main-39:/layout/dialog_new_page.xml"
     },
     {
         "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_image.xml.flat",
@@ -130,5 +174,13 @@
     {
         "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_palette.xml.flat",
         "source": "com.schedulediary.app-main-39:/drawable/ic_palette.xml"
+    },
+    {
+        "merged": "com.schedulediary.app-merged_res-37:/drawable_ic_view_list.xml.flat",
+        "source": "com.schedulediary.app-main-39:/drawable/ic_view_list.xml"
+    },
+    {
+        "merged": "com.schedulediary.app-merged_res-37:/drawable_bg_round_button.xml.flat",
+        "source": "com.schedulediary.app-main-39:/drawable/bg_round_button.xml"
     }
 ]

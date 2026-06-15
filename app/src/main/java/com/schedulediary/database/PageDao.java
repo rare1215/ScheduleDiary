@@ -39,4 +39,7 @@ public interface PageDao {
 
     @Query("SELECT MAX(pageNumber) FROM pages WHERE diaryId = :diaryId")
     int getMaxPageNumber(int diaryId);
+
+    @Query("UPDATE pages SET pageNumber = :pageNumber WHERE pageId = :pageId")
+    void updatePageNumber(int pageId, int pageNumber);
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- 브랜드 컬러 (스크린샷 보라/라벤더 계열) -->
-    <color name="primary">#9C27B0</color>
+    <!-- 브랜드 컬러 (연한 보라/라벤더 계열로 라이트닝) -->
+    <color name="primary">#C9A8F5</color>
     <color name="primary_light">#E9D5FF</color>
-    <color name="primary_variant">#7B1FA2</color>
+    <color name="primary_variant">#B794F4</color>
     <color name="primary_soft">#F3E8FF</color>
-    <color name="accent">#CE93D8</color>
+    <color name="accent">#D8B4FE</color>
 
     <!-- 배경 -->
     <color name="background">#F5F0FF</color>
@@ -16,7 +16,8 @@
     <color name="text_primary">#212121</color>
     <color name="text_secondary">#757575</color>
     <color name="text_hint">#BDBDBD</color>
-    <color name="text_on_primary">#FFFFFF</color>
+    <color name="text_on_primary">#6B21A8</color>
+    <color name="text_on_primary_light">#FFFFFF</color>
 
     <!-- 상태 -->
     <color name="error">#F44336</color>
@@ -26,4 +27,16 @@
     <!-- 기타 -->
     <color name="transparent">#00000000</color>
     <color name="overlay">#80000000</color>
+
+    <!-- 다이어리 커버 프리셋 컬러 (DiaryEditDialogFragment 기본값) -->
+    <color name="preset_lavender">#E9D5FF</color>
+    <color name="preset_pink">#FFC1C1</color>
+    <color name="preset_peach">#FFD8A8</color>
+    <color name="preset_sky">#A8D8EA</color>
+    <color name="preset_mint">#B5EAD7</color>
+    <color name="preset_lemon">#FFFACD</color>
+    <color name="preset_periwinkle">#C1C1FF</color>
+    <color name="preset_rose">#FFB3BA</color>
+    <color name="preset_white">#FFFFFF</color>
+    <color name="preset_gray">#F0F0F0</color>
 </resources>

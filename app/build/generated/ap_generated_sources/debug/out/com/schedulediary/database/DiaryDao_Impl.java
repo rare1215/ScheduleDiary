@@ -6,6 +6,7 @@ import androidx.room.EntityDeletionOrUpdateAdapter;
 import androidx.room.EntityInsertionAdapter;
 import androidx.room.RoomDatabase;
 import androidx.room.RoomSQLiteQuery;
+import androidx.room.SharedSQLiteStatement;
 import androidx.room.util.CursorUtil;
 import androidx.room.util.DBUtil;
 import androidx.sqlite.db.SupportSQLiteStatement;
@@ -30,13 +31,15 @@ public final class DiaryDao_Impl implements DiaryDao {
 
   private final EntityDeletionOrUpdateAdapter<AdDiary> __updateAdapterOfAdDiary;
 
+  private final SharedSQLiteStatement __preparedStmtOfUpdateSortOrder;
+
   public DiaryDao_Impl(@NonNull final RoomDatabase __db) {
     this.__db = __db;
     this.__insertionAdapterOfAdDiary = new EntityInsertionAdapter<AdDiary>(__db) {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR ABORT INTO `diaries` (`diaryId`,`diaryName`,`description`,`ownerId`,`coverColor`,`coverImagePath`,`createdAt`,`updatedAt`) VALUES (nullif(?, 0),?,?,?,?,?,?,?)";
+        return "INSERT OR ABORT INTO `diaries` (`diaryId`,`diaryName`,`description`,`ownerId`,`coverColor`,`coverImagePath`,`createdAt`,`updatedAt`,`sortOrder`) VALUES (nullif(?, 0),?,?,?,?,?,?,?,?)";
       }
 
       @Override
@@ -65,6 +68,7 @@ public final class DiaryDao_Impl implements DiaryDao {
         }
         statement.bindLong(7, entity.getCreatedAt());
         statement.bindLong(8, entity.getUpdatedAt());
+        statement.bindLong(9, entity.getSortOrder());
       }
     };
     this.__deletionAdapterOfAdDiary = new EntityDeletionOrUpdateAdapter<AdDiary>(__db) {
@@ -83,7 +87,7 @@ public final class DiaryDao_Impl implements DiaryDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "UPDATE OR ABORT `diaries` SET `diaryId` = ?,`diaryName` = ?,`description` = ?,`ownerId` = ?,`coverColor` = ?,`coverImagePath` = ?,`createdAt` = ?,`updatedAt` = ? WHERE `diaryId` = ?";
+        return "UPDATE OR ABORT `diaries` SET `diaryId` = ?,`diaryName` = ?,`description` = ?,`ownerId` = ?,`coverColor` = ?,`coverImagePath` = ?,`createdAt` = ?,`updatedAt` = ?,`sortOrder` = ? WHERE `diaryId` = ?";
       }
 
       @Override
@@ -112,7 +116,16 @@ public final class DiaryDao_Impl implements DiaryDao {
         }
         statement.bindLong(7, entity.getCreatedAt());
         statement.bindLong(8, entity.getUpdatedAt());
-        statement.bindLong(9, entity.getDiaryId());
+        statement.bindLong(9, entity.getSortOrder());
+        statement.bindLong(10, entity.getDiaryId());
+      }
+    };
+    this.__preparedStmtOfUpdateSortOrder = new SharedSQLiteStatement(__db) {
+      @Override
+      @NonNull
+      public String createQuery() {
+        final String _query = "UPDATE diaries SET sortOrder = ? WHERE diaryId = ?";
+        return _query;
       }
     };
   }
@@ -155,8 +168,29 @@ public final class DiaryDao_Impl implements DiaryDao {
   }
 
   @Override
-  public List<AdDiary> getDiariesByOwner(final int ownerId) {
-    final String _sql = "SELECT * FROM diaries WHERE ownerId = ? ORDER BY updatedAt DESC";
+  public void updateSortOrder(final int diaryId, final int sortOrder) {
+    __db.assertNotSuspendingTransaction();
+    final SupportSQLiteStatement _stmt = __preparedStmtOfUpdateSortOrder.acquire();
+    int _argIndex = 1;
+    _stmt.bindLong(_argIndex, sortOrder);
+    _argIndex = 2;
+    _stmt.bindLong(_argIndex, diaryId);
+    try {
+      __db.beginTransaction();
+      try {
+        _stmt.executeUpdateDelete();
+        __db.setTransactionSuccessful();
+      } finally {
+        __db.endTransaction();
+      }
+    } finally {
+      __preparedStmtOfUpdateSortOrder.release(_stmt);
+    }
+  }
+
+  @Override
+  public List<AdDiary> getDiariesByOwnerSorted(final int ownerId) {
+    final String _sql = "SELECT * FROM diaries WHERE ownerId = ? ORDER BY sortOrder ASC, diaryId ASC";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
     _statement.bindLong(_argIndex, ownerId);
@@ -171,6 +205,7 @@ public final class DiaryDao_Impl implements DiaryDao {
       final int _cursorIndexOfCoverImagePath = CursorUtil.getColumnIndexOrThrow(_cursor, "coverImagePath");
       final int _cursorIndexOfCreatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "createdAt");
       final int _cursorIndexOfUpdatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "updatedAt");
+      final int _cursorIndexOfSortOrder = CursorUtil.getColumnIndexOrThrow(_cursor, "sortOrder");
       final List<AdDiary> _result = new ArrayList<AdDiary>(_cursor.getCount());
       while (_cursor.moveToNext()) {
         final AdDiary _item;
@@ -211,7 +246,32 @@ public final class DiaryDao_Impl implements DiaryDao {
         final long _tmpUpdatedAt;
         _tmpUpdatedAt = _cursor.getLong(_cursorIndexOfUpdatedAt);
         _item.setUpdatedAt(_tmpUpdatedAt);
+        final int _tmpSortOrder;
+        _tmpSortOrder = _cursor.getInt(_cursorIndexOfSortOrder);
+        _item.setSortOrder(_tmpSortOrder);
         _result.add(_item);
+      }
+      return _result;
+    } finally {
+      _cursor.close();
+      _statement.release();
+    }
+  }
+
+  @Override
+  public int getMaxSortOrder(final int ownerId) {
+    final String _sql = "SELECT COALESCE(MAX(sortOrder), -1) FROM diaries WHERE ownerId = ?";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
+    int _argIndex = 1;
+    _statement.bindLong(_argIndex, ownerId);
+    __db.assertNotSuspendingTransaction();
+    final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+    try {
+      final int _result;
+      if (_cursor.moveToFirst()) {
+        _result = _cursor.getInt(0);
+      } else {
+        _result = 0;
       }
       return _result;
     } finally {
@@ -237,6 +297,7 @@ public final class DiaryDao_Impl implements DiaryDao {
       final int _cursorIndexOfCoverImagePath = CursorUtil.getColumnIndexOrThrow(_cursor, "coverImagePath");
       final int _cursorIndexOfCreatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "createdAt");
       final int _cursorIndexOfUpdatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "updatedAt");
+      final int _cursorIndexOfSortOrder = CursorUtil.getColumnIndexOrThrow(_cursor, "sortOrder");
       final AdDiary _result;
       if (_cursor.moveToFirst()) {
         final String _tmpDiaryName;
@@ -276,6 +337,9 @@ public final class DiaryDao_Impl implements DiaryDao {
         final long _tmpUpdatedAt;
         _tmpUpdatedAt = _cursor.getLong(_cursorIndexOfUpdatedAt);
         _result.setUpdatedAt(_tmpUpdatedAt);
+        final int _tmpSortOrder;
+        _tmpSortOrder = _cursor.getInt(_cursorIndexOfSortOrder);
+        _result.setSortOrder(_tmpSortOrder);
       } else {
         _result = null;
       }
@@ -309,6 +373,7 @@ public final class DiaryDao_Impl implements DiaryDao {
       final int _cursorIndexOfCoverImagePath = CursorUtil.getColumnIndexOrThrow(_cursor, "coverImagePath");
       final int _cursorIndexOfCreatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "createdAt");
       final int _cursorIndexOfUpdatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "updatedAt");
+      final int _cursorIndexOfSortOrder = CursorUtil.getColumnIndexOrThrow(_cursor, "sortOrder");
       final List<AdDiary> _result = new ArrayList<AdDiary>(_cursor.getCount());
       while (_cursor.moveToNext()) {
         final AdDiary _item;
@@ -349,6 +414,9 @@ public final class DiaryDao_Impl implements DiaryDao {
         final long _tmpUpdatedAt;
         _tmpUpdatedAt = _cursor.getLong(_cursorIndexOfUpdatedAt);
         _item.setUpdatedAt(_tmpUpdatedAt);
+        final int _tmpSortOrder;
+        _tmpSortOrder = _cursor.getInt(_cursorIndexOfSortOrder);
+        _item.setSortOrder(_tmpSortOrder);
         _result.add(_item);
       }
       return _result;

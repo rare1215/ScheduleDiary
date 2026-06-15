@@ -33,6 +33,9 @@ public class AdDiary {
 
     private long updatedAt;
 
+    // 사용자가 드래그로 정렬한 순서 (8번 수정사항, 낮을수록 위)
+    private int sortOrder;
+
     public AdDiary(@NonNull String diaryName, String description, int ownerId, String coverColor) {
         this.diaryName = diaryName;
         this.description = description;
@@ -40,6 +43,7 @@ public class AdDiary {
         this.coverColor = coverColor != null ? coverColor : "#E9D5FF";
         this.createdAt = System.currentTimeMillis();
         this.updatedAt = System.currentTimeMillis();
+        this.sortOrder = 0;
     }
 
     // Getters & Setters
@@ -67,4 +71,7 @@ public class AdDiary {
 
     public long getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(long updatedAt) { this.updatedAt = updatedAt; }
+
+    public int getSortOrder() { return sortOrder; }
+    public void setSortOrder(int sortOrder) { this.sortOrder = sortOrder; }
 }

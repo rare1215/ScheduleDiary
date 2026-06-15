@@ -30,17 +30,18 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
 
         dataController = DataController.getInstance(this);
-        initViews();
-        setListeners();
 
         // 이미 로그인된 경우 메인으로 바로 이동
         if (dataController.isLoggedIn()) {
             goToMain();
             return;
         }
+
+        setContentView(R.layout.activity_login);
+        initViews();
+        setListeners();
     }
 
     private void initViews() {

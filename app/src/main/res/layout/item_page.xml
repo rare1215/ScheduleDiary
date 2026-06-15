@@ -17,8 +17,9 @@
         android:padding="12dp"
         android:gravity="center_vertical">
 
-        <!-- 페이지 번호 -->
+        <!-- 페이지 번호 (다이어리 커버 색상으로 동적 변경, 11번) -->
         <FrameLayout
+            android:id="@+id/flPageNumber"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:background="@drawable/bg_page_number">
@@ -27,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/text_on_primary"
+                android:textColor="@color/text_on_primary_light"
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </FrameLayout>
@@ -73,5 +74,13 @@
                 android:maxLines="2"
                 android:ellipsize="end" />
         </LinearLayout>
+
+        <!-- 드래그 핸들 (8번 수정사항: 리스트 보기에서만 표시) -->
+        <ImageView
+            android:id="@+id/ivDragHandle"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_drag_handle"
+            android:contentDescription="드래그하여 순서 변경" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

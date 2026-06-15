@@ -22,8 +22,14 @@ public interface DiaryDao {
     @Delete
     void deleteDiary(AdDiary diary);
 
-    @Query("SELECT * FROM diaries WHERE ownerId = :ownerId ORDER BY updatedAt DESC")
-    List<AdDiary> getDiariesByOwner(int ownerId);
+    @Query("SELECT * FROM diaries WHERE ownerId = :ownerId ORDER BY sortOrder ASC, diaryId ASC")
+    List<AdDiary> getDiariesByOwnerSorted(int ownerId);
+
+    @Query("UPDATE diaries SET sortOrder = :sortOrder WHERE diaryId = :diaryId")
+    void updateSortOrder(int diaryId, int sortOrder);
+
+    @Query("SELECT COALESCE(MAX(sortOrder), -1) FROM diaries WHERE ownerId = :ownerId")
+    int getMaxSortOrder(int ownerId);
 
     @Query("SELECT * FROM diaries WHERE diaryId = :diaryId LIMIT 1")
     AdDiary getDiaryById(int diaryId);

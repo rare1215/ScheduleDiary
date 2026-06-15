@@ -11,35 +11,41 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.schedulediary.R;
 import com.schedulediary.adapter.DiaryAdapter;
+import com.schedulediary.adapter.DragSortCallback;
 import com.schedulediary.controller.DataController;
 import com.schedulediary.model.AdDiary;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.textfield.TextInputEditText;
-
 /**
  * 다이어리 목록 메인 화면 (스크린샷 5번, Analysis §Use case #4 Create new diary)
+ * - 9번: 그리드(커버 미리보기) / 리스트(드래그 정렬) 보기모드 전환
+ * - 8번: 리스트 모드에서 드래그로 다이어리 순서 변경
  */
 public class MainActivity extends AppCompatActivity {
 
     private TextView tvUserGreeting;
-    private TextInputEditText etSearchDiary;
+    private EditText etSearchDiary;
     private RecyclerView rvDiaries;
     private ExtendedFloatingActionButton fabNewDiary;
     private ImageButton btnLogout;
+    private ImageButton btnViewMode;
 
     private DiaryAdapter diaryAdapter;
     private DataController dataController;
+    private ItemTouchHelper itemTouchHelper;
     private int currentUserId;
+
+    /** 검색 중에는 드래그 정렬을 막는다 (검색 결과 순서와 전체 정렬이 섞이지 않도록) */
+    private boolean isSearching = false;
 
     public static final String EXTRA_DIARY_ID = "diaryId";
     public static final String EXTRA_DIARY_NAME = "diaryName";
@@ -74,13 +80,38 @@ public class MainActivity extends AppCompatActivity {
         rvDiaries = findViewById(R.id.rvDiaries);
         fabNewDiary = findViewById(R.id.fabNewDiary);
         btnLogout = findViewById(R.id.btnLogout);
+        btnViewMode = findViewById(R.id.btnViewMode);
 
-        // RecyclerView 설정 (1열 리스트)
         diaryAdapter = new DiaryAdapter(new ArrayList<>(),
                 this::onDiaryClick,
                 this::onDiaryLongClick);
-        rvDiaries.setLayoutManager(new GridLayoutManager(this, 1));
+        diaryAdapter.setViewType(DiaryAdapter.VIEW_TYPE_GRID);
+
+        rvDiaries.setLayoutManager(new LinearLayoutManager(this));
         rvDiaries.setAdapter(diaryAdapter);
+
+        // 드래그 정렬 (8번 수정사항: 리스트 모드에서만 동작)
+        DragSortCallback dragCallback = new DragSortCallback(new DragSortCallback.OnItemMoveListener() {
+            @Override
+            public void onItemMove(int fromPosition, int toPosition) {
+                diaryAdapter.moveItem(fromPosition, toPosition);
+            }
+
+            @Override
+            public void onDragFinished() {
+                persistDiaryOrder();
+            }
+        });
+        itemTouchHelper = new ItemTouchHelper(dragCallback);
+        itemTouchHelper.attachToRecyclerView(rvDiaries);
+
+        diaryAdapter.setOnDragHandleTouchListener(viewHolder -> {
+            if (diaryAdapter.getViewType() == DiaryAdapter.VIEW_TYPE_LIST && !isSearching) {
+                itemTouchHelper.startDrag(viewHolder);
+            }
+        });
+
+        updateViewModeIcon();
     }
 
     private void setListeners() {
@@ -88,10 +119,13 @@ public class MainActivity extends AppCompatActivity {
 
         btnLogout.setOnClickListener(v -> handleLogoutRequest());
 
+        btnViewMode.setOnClickListener(v -> toggleViewMode());
+
         etSearchDiary.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int st, int c, int a) {}
             @Override public void onTextChanged(CharSequence s, int st, int b, int c) {
                 String query = s.toString().trim();
+                isSearching = !query.isEmpty();
                 if (query.isEmpty()) {
                     loadDiaryList();
                 } else {
@@ -100,6 +134,25 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override public void afterTextChanged(Editable s) {}
         });
+    }
+
+    // ────────────────────────────────────────────────
+    // 보기모드 전환 (9번 수정사항)
+    // ────────────────────────────────────────────────
+
+    private void toggleViewMode() {
+        int newType = (diaryAdapter.getViewType() == DiaryAdapter.VIEW_TYPE_GRID)
+                ? DiaryAdapter.VIEW_TYPE_LIST : DiaryAdapter.VIEW_TYPE_GRID;
+        diaryAdapter.setViewType(newType);
+        updateViewModeIcon();
+    }
+
+    private void updateViewModeIcon() {
+        if (diaryAdapter.getViewType() == DiaryAdapter.VIEW_TYPE_GRID) {
+            btnViewMode.setImageResource(R.drawable.ic_view_list);
+        } else {
+            btnViewMode.setImageResource(R.drawable.ic_grid_view);
+        }
     }
 
     // ────────────────────────────────────────────────
@@ -125,6 +178,17 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(List<AdDiary> diaries) {
                 diaryAdapter.updateData(diaries);
             }
+            @Override
+            public void onError(String message) {}
+        });
+    }
+
+    /** 드래그 정렬 결과를 DB에 저장 (8번 수정사항) */
+    private void persistDiaryOrder() {
+        if (isSearching) return; // 검색 중에는 정렬 저장하지 않음
+        dataController.updateDiaryOrder(diaryAdapter.getCurrentData(), new DataController.Callback<Boolean>() {
+            @Override
+            public void onSuccess(Boolean result) {}
             @Override
             public void onError(String message) {}
         });

@@ -12,6 +12,7 @@ import com.schedulediary.model.User;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -131,14 +132,26 @@ public class DataController {
 
     public void loadDiaryList(int userId, Callback<List<AdDiary>> callback) {
         executor.execute(() -> {
-            List<AdDiary> list = db.diaryDao().getDiariesByOwner(userId);
+            List<AdDiary> list = db.diaryDao().getDiariesByOwnerSorted(userId);
             postSuccess(callback, list);
+        });
+    }
+
+    /** 다이어리 드래그 정렬 결과 저장 (8번 수정사항) */
+    public void updateDiaryOrder(List<AdDiary> orderedDiaries, Callback<Boolean> callback) {
+        executor.execute(() -> {
+            for (int i = 0; i < orderedDiaries.size(); i++) {
+                db.diaryDao().updateSortOrder(orderedDiaries.get(i).getDiaryId(), i);
+            }
+            postSuccess(callback, true);
         });
     }
 
     public void createDiary(AdDiary diary, Callback<Long> callback) {
         executor.execute(() -> {
             try {
+                int maxOrder = db.diaryDao().getMaxSortOrder(diary.getOwnerId());
+                diary.setSortOrder(maxOrder + 1);
                 long id = db.diaryDao().insertDiary(diary);
                 if (id > 0) {
                     postSuccess(callback, id);
@@ -256,6 +269,49 @@ public class DataController {
             List<AdPage> list = db.pageDao().searchPages(diaryId, query);
             postSuccess(callback, list);
         });
+    }
+
+    /** 페이지 드래그 정렬 결과 저장 - pageNumber 재할당 (8번 수정사항) */
+    public void updatePageOrder(List<AdPage> orderedPages, Callback<Boolean> callback) {
+        executor.execute(() -> {
+            for (int i = 0; i < orderedPages.size(); i++) {
+                int newNumber = i + 1;
+                AdPage page = orderedPages.get(i);
+                page.setPageNumber(newNumber);
+                db.pageDao().updatePageNumber(page.getPageId(), newNumber);
+            }
+            postSuccess(callback, true);
+        });
+    }
+
+    // ────────────────────────────────────────────────
+    // 사용자 정의 커버 색상 프리셋 (2번 수정사항)
+    // SharedPreferences에 HEX 색상 코드 목록(쉼표 구분)으로 저장
+    // ────────────────────────────────────────────────
+
+    private static final String KEY_CUSTOM_COLOR_PRESETS = "customColorPresets";
+    private static final int MAX_CUSTOM_PRESETS = 12;
+
+    /** 저장된 사용자 정의 색상 프리셋 목록 반환 (없으면 빈 리스트) */
+    public List<String> getCustomColorPresets() {
+        String raw = prefs.getString(KEY_CUSTOM_COLOR_PRESETS, "");
+        List<String> result = new ArrayList<>();
+        if (raw == null || raw.isEmpty()) return result;
+        for (String hex : raw.split(",")) {
+            if (!hex.trim().isEmpty()) result.add(hex.trim());
+        }
+        return result;
+    }
+
+    /** 새 색상 프리셋 추가 (중복 시 무시, 최대 개수 초과 시 가장 오래된 것 제거) */
+    public void addCustomColorPreset(String hex) {
+        List<String> presets = getCustomColorPresets();
+        if (presets.contains(hex)) return;
+        presets.add(hex);
+        while (presets.size() > MAX_CUSTOM_PRESETS) {
+            presets.remove(0);
+        }
+        prefs.edit().putString(KEY_CUSTOM_COLOR_PRESETS, String.join(",", presets)).apply();
     }
 
     // ────────────────────────────────────────────────

@@ -1,7 +1,10 @@
 package com.schedulediary.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.schedulediary.model.PageElement;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -15,6 +18,7 @@ public class ObjectController {
     private final Stack<List<PageElement>> undoStack = new Stack<>();
     private final Stack<List<PageElement>> redoStack = new Stack<>();
     private List<PageElement> currentElements;
+    private final Gson gson = new Gson();
 
     public interface OnChangeListener {
         void onElementsChanged(List<PageElement> elements);
@@ -60,6 +64,7 @@ public class ObjectController {
             case IMAGE:
                 element.setWidth(200f);
                 element.setHeight(200f);
+                element.setAspectRatioLocked(true); // 4번: 이미지는 기본 비율 고정
                 break;
             case SHAPE:
                 element.setShapeType(PageElement.ShapeType.RECTANGLE);
@@ -206,13 +211,16 @@ public class ObjectController {
     }
 
     /**
-     * 리스트 딥카피 - Undo/Redo용 스냅샷
-     * 실제 프로젝트에서는 Gson 직렬화/역직렬화로 완전한 딥카피를 권장합니다.
+     * 리스트 딥카피 - Undo/Redo용 스냅샷.
+     * PageCanvasView가 선택된 요소를 직접 mutate하므로(이동/리사이즈/회전 중),
+     * 참조를 공유하는 얕은 복사로는 undo 시 변경 전 상태를 보존할 수 없다.
+     * Gson을 이용해 완전한 딥카피를 수행한다.
      */
     private List<PageElement> deepCopy(List<PageElement> source) {
-        // Gson을 이용한 딥카피 (런타임에 실제 동작)
-        // 여기서는 간단히 새 리스트에 같은 참조를 복사 (실제 앱에서는 Gson 사용 권장)
-        return new ArrayList<>(source);
+        Type type = new TypeToken<List<PageElement>>() {}.getType();
+        String json = gson.toJson(source);
+        List<PageElement> copy = gson.fromJson(json, type);
+        return copy != null ? copy : new ArrayList<>();
     }
 
     private void notifyChanged() {

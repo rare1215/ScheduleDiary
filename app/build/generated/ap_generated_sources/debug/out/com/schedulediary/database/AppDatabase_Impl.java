@@ -36,17 +36,17 @@ public final class AppDatabase_Impl extends AppDatabase {
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(1) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(2) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS `users` (`userId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `email` TEXT NOT NULL, `passwordHash` TEXT NOT NULL, `name` TEXT NOT NULL, `createdAt` INTEGER NOT NULL)");
         db.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS `index_users_email` ON `users` (`email`)");
-        db.execSQL("CREATE TABLE IF NOT EXISTS `diaries` (`diaryId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `diaryName` TEXT NOT NULL, `description` TEXT, `ownerId` INTEGER NOT NULL, `coverColor` TEXT, `coverImagePath` TEXT, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, FOREIGN KEY(`ownerId`) REFERENCES `users`(`userId`) ON UPDATE NO ACTION ON DELETE CASCADE )");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `diaries` (`diaryId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `diaryName` TEXT NOT NULL, `description` TEXT, `ownerId` INTEGER NOT NULL, `coverColor` TEXT, `coverImagePath` TEXT, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, `sortOrder` INTEGER NOT NULL, FOREIGN KEY(`ownerId`) REFERENCES `users`(`userId`) ON UPDATE NO ACTION ON DELETE CASCADE )");
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_diaries_ownerId` ON `diaries` (`ownerId`)");
         db.execSQL("CREATE TABLE IF NOT EXISTS `pages` (`pageId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `diaryId` INTEGER NOT NULL, `title` TEXT NOT NULL, `textContent` TEXT, `pageNumber` INTEGER NOT NULL, `backgroundStyle` TEXT, `elementsJson` TEXT, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, FOREIGN KEY(`diaryId`) REFERENCES `diaries`(`diaryId`) ON UPDATE NO ACTION ON DELETE CASCADE )");
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_pages_diaryId` ON `pages` (`diaryId`)");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd0bf196f8bc5136ee88e3f7bc7c239da')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '59d03eda2231759f663cdc276cc6d838')");
       }
 
       @Override
@@ -114,7 +114,7 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoUsers + "\n"
                   + " Found:\n" + _existingUsers);
         }
-        final HashMap<String, TableInfo.Column> _columnsDiaries = new HashMap<String, TableInfo.Column>(8);
+        final HashMap<String, TableInfo.Column> _columnsDiaries = new HashMap<String, TableInfo.Column>(9);
         _columnsDiaries.put("diaryId", new TableInfo.Column("diaryId", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsDiaries.put("diaryName", new TableInfo.Column("diaryName", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsDiaries.put("description", new TableInfo.Column("description", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
@@ -123,6 +123,7 @@ public final class AppDatabase_Impl extends AppDatabase {
         _columnsDiaries.put("coverImagePath", new TableInfo.Column("coverImagePath", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsDiaries.put("createdAt", new TableInfo.Column("createdAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsDiaries.put("updatedAt", new TableInfo.Column("updatedAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiaries.put("sortOrder", new TableInfo.Column("sortOrder", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         final HashSet<TableInfo.ForeignKey> _foreignKeysDiaries = new HashSet<TableInfo.ForeignKey>(1);
         _foreignKeysDiaries.add(new TableInfo.ForeignKey("users", "CASCADE", "NO ACTION", Arrays.asList("ownerId"), Arrays.asList("userId")));
         final HashSet<TableInfo.Index> _indicesDiaries = new HashSet<TableInfo.Index>(1);
@@ -157,7 +158,7 @@ public final class AppDatabase_Impl extends AppDatabase {
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "d0bf196f8bc5136ee88e3f7bc7c239da", "ef802285580a9ad85a9bdfd9fadad767");
+    }, "59d03eda2231759f663cdc276cc6d838", "3348ab8c9a72974a2f984c383d070020");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;

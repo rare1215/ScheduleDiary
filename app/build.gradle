@@ -1,9 +1,10 @@
+//최종 수정본
 plugins {
     id 'com.android.application'
 }
 
 android {
-    namespace "com.schedulediary"
+    namespace 'com.schedulediary'
     compileSdk 34
 
     defaultConfig {

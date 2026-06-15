@@ -46,6 +46,9 @@ public class PageElement {
     // z-order (레이어 순서)
     private int zIndex;
 
+    // 이미지/도형 - 비율 고정 여부 (4, 5번 수정사항)
+    private boolean aspectRatioLocked;
+
     public PageElement() {}
 
     public PageElement(String elementId, ElementType type) {
@@ -55,6 +58,7 @@ public class PageElement {
         this.height = 100f;
         this.rotation = 0f;
         this.zIndex = 0;
+        this.aspectRatioLocked = false;
         // 기본 텍스트 설정
         this.textSize = 14f;
         this.textColor = 0xFF000000;
@@ -128,4 +132,7 @@ public class PageElement {
 
     public int getZIndex() { return zIndex; }
     public void setZIndex(int zIndex) { this.zIndex = zIndex; }
+
+    public boolean isAspectRatioLocked() { return aspectRatioLocked; }
+    public void setAspectRatioLocked(boolean aspectRatioLocked) { this.aspectRatioLocked = aspectRatioLocked; }
 }

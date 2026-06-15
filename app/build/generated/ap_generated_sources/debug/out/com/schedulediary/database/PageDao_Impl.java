@@ -33,6 +33,8 @@ public final class PageDao_Impl implements PageDao {
 
   private final SharedSQLiteStatement __preparedStmtOfShiftPagesDown;
 
+  private final SharedSQLiteStatement __preparedStmtOfUpdatePageNumber;
+
   public PageDao_Impl(@NonNull final RoomDatabase __db) {
     this.__db = __db;
     this.__insertionAdapterOfAdPage = new EntityInsertionAdapter<AdPage>(__db) {
@@ -128,6 +130,14 @@ public final class PageDao_Impl implements PageDao {
         return _query;
       }
     };
+    this.__preparedStmtOfUpdatePageNumber = new SharedSQLiteStatement(__db) {
+      @Override
+      @NonNull
+      public String createQuery() {
+        final String _query = "UPDATE pages SET pageNumber = ? WHERE pageId = ?";
+        return _query;
+      }
+    };
   }
 
   @Override
@@ -185,6 +195,27 @@ public final class PageDao_Impl implements PageDao {
       }
     } finally {
       __preparedStmtOfShiftPagesDown.release(_stmt);
+    }
+  }
+
+  @Override
+  public void updatePageNumber(final int pageId, final int pageNumber) {
+    __db.assertNotSuspendingTransaction();
+    final SupportSQLiteStatement _stmt = __preparedStmtOfUpdatePageNumber.acquire();
+    int _argIndex = 1;
+    _stmt.bindLong(_argIndex, pageNumber);
+    _argIndex = 2;
+    _stmt.bindLong(_argIndex, pageId);
+    try {
+      __db.beginTransaction();
+      try {
+        _stmt.executeUpdateDelete();
+        __db.setTransactionSuccessful();
+      } finally {
+        __db.endTransaction();
+      }
+    } finally {
+      __preparedStmtOfUpdatePageNumber.release(_stmt);
     }
   }
 

@@ -109,12 +109,9 @@
                 <View android:layout_width="1dp" android:layout_height="20dp"
                     android:background="@color/divider" android:layout_marginHorizontal="4dp"/>
 
-                <ImageButton android:id="@+id/btnBullet"
-                    style="@style/ToolbarIcon" android:src="@drawable/ic_format_list_bulleted"
-                    android:contentDescription="글머리"/>
-                <ImageButton android:id="@+id/btnList"
-                    style="@style/ToolbarIcon" android:src="@drawable/ic_format_list_numbered"
-                    android:contentDescription="텍스트 추가"/>
+                <ImageButton android:id="@+id/btnAddText"
+                    style="@style/ToolbarIcon" android:src="@drawable/ic_text_fields"
+                    android:contentDescription="텍스트 삽입"/>
 
             </LinearLayout>
 
@@ -139,14 +136,19 @@
                     android:background="@color/divider" android:layout_marginHorizontal="4dp"/>
 
                 <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
+                    android:id="@+id/btnFontSize"
+                    android:layout_width="64dp"
                     android:layout_height="32dp"
                     android:text="보통"
+                    android:textAlignment="center"
+                    android:gravity="center"
                     android:textSize="11sp"
                     android:textColor="@color/text_secondary"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     app:backgroundTint="@color/primary_soft"
                     app:cornerRadius="8dp"
-                    android:paddingHorizontal="8dp"
+                    android:paddingHorizontal="4dp"
                     style="@style/Widget.MaterialComponents.Button.TextButton"/>
 
                 <View android:layout_width="1dp" android:layout_height="20dp"

@@ -1,4 +1,4 @@
-#Sat Jun 13 03:39:07 KST 2026
-base.0=C\:\\Users\\Owner\\Downloads\\ScheduleDiary\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\0\\classes.dex
+#Mon Jun 15 21:16:32 KST 2026
+base.0=C\:\\Users\\Owner\\Downloads\\ScheduleDiary_2\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\0\\classes.dex
 path.0=0/classes.dex
 renamed.0=classes.dex

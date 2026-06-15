@@ -6,8 +6,9 @@
     android:orientation="vertical"
     android:background="@color/background">
 
-    <!-- 상단 헤더 (보라색 배경, 스크린샷 3번) -->
+    <!-- 상단 헤더 (다이어리 커버 색상 적용, 스크린샷 3번) -->
     <LinearLayout
+        android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -28,15 +29,16 @@
                 android:layout_height="40dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_arrow_back"
-                android:tint="@color/text_on_primary"
+                android:tint="@color/text_on_primary_light"
                 android:contentDescription="뒤로" />
 
             <TextView
+                android:id="@+id/tvBackLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:text="다이어리 목록으로"
-                android:textColor="@color/text_on_primary"
+                android:textColor="@color/text_on_primary_light"
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -45,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:textColor="@color/text_on_primary"
+            android:textColor="@color/text_on_primary_light"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -57,7 +59,7 @@
             android:textSize="13sp" />
     </LinearLayout>
 
-    <!-- 검색 + 새 페이지 버튼 -->
+    <!-- 검색 + 보기모드 토글 + 새 페이지 버튼 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -83,6 +85,18 @@
                 android:hint="페이지 검색…"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- 보기모드 전환: 리스트(드래그 정렬) / 그리드(미리보기) -->
+        <ImageButton
+            android:id="@+id/btnViewMode"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/bg_round_button"
+            android:backgroundTint="@color/primary_soft"
+            android:src="@drawable/ic_grid_view"
+            android:tint="@color/primary_variant"
+            android:contentDescription="보기 방식 전환" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnNewPage"

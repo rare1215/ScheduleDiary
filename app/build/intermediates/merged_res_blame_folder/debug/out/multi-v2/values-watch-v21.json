@@ -4,7 +4,7 @@
             "outputFile": "com.schedulediary.app-mergeDebugResources-35:/values-watch-v21/values-watch-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Owner\\.gradle\\caches\\transforms-4\\e37d2341650e435ee29e7d79aec291b8\\transformed\\appcompat-1.7.0\\res\\values-watch-v21\\values-watch-v21.xml",
+                    "source": "C:\\Users\\Owner\\.gradle\\caches\\9.3.0\\transforms\\6e45a3764f1bbb3d54bce1a72c4e059f\\workspace\\transformed\\appcompat-1.7.0\\res\\values-watch-v21\\values-watch-v21.xml",
                     "from": {
                         "startLines": "2,6,10",
                         "startColumns": "4,4,4",
